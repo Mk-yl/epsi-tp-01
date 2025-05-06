@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import {TitleFormatPipe} from './title-format.pipe';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component'; // Importez FooterComponent
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet, TitleFormatPipe],
-  standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  standalone: true
 })
 export class AppComponent {
   title = 'tp01_ANGULAR_ePsi';

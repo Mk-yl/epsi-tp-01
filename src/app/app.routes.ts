@@ -9,6 +9,6 @@ export const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'books', component: BookListComponent },
   { path: 'books/add', component: AddBookComponent },
-  { path: 'books/:id', component: BookDetailComponent },
-  { path: '**', redirectTo: '' }
+  { path: 'books/:id', component: BookDetailComponent }, // création de la route pour la page détail d'un livre
+  { path: '**', redirectTo: '' },
 ];
