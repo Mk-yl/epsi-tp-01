@@ -1,17 +1,21 @@
 <div class="book-detail-container">
-  <div class="book-card">
+  <div class="book-card" *ngIf="book"> <!-- on vérifie si le livre existe avant de l'afficher -->
     <!-- TODO 9: Dans la console on voit cette erreur : main.ts:5 ERROR TypeError: Cannot read properties of undefined (reading 'title')
      En realité on affiche le titre du livre avant qu'il ne soit défini. Fix le bug -->
-    <h1 [appHighlight]="true" class="book-title">{{ book?.title }}</h1> <!-- TODO 10: Appliquer la directive highlight à ce champ -->
+    <h1 class="book-title" [appHighlight]="true">{{ book.title }}</h1> <!-- TODO 10: Appliquer la directive highlight à ce champ -->
 
     <div class="book-info">
       <p class="author">{{ book.author }}</p>
-      <p class="description">{{ book.description }}</p>
+      <p class="description">{{ book.description | truncate }}</p>
 
       <div class="info-grid">
         <div class="info-item">
           <strong>Catégorie</strong>
           {{ book.category }}
+        </div>
+        <div class="info-item">
+          <strong>Détails</strong>
+          {{ book.description}}
         </div>
         <div class="info-item">
           <strong>Note</strong>

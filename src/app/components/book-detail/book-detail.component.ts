@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book.model';
-import {HighlightDirective} from '../../directives/highlight.directive';
+import { HighlightDirective } from '../../directives/highlight.directive';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 @Component({
   selector: 'app-book-detail',
   standalone: true,
-  imports: [CommonModule, HighlightDirective],
+  imports: [CommonModule, HighlightDirective, TruncatePipe],
   templateUrl: 'book-detail.component.html',
 })
 export class BookDetailComponent implements OnInit {
@@ -36,14 +37,16 @@ export class BookDetailComponent implements OnInit {
   }
 
   updateRating(rating: number): void {
-    this.bookService.updateBook(this.book.id, { rating: rating }).subscribe({
-      next: (updatedBook: Book) => {
-        console.log('Nouvelle note:', updatedBook);
-      },
-      error: (err: any) => {
-        console.error('Erreur lors de la mise à jour de la note:', err);
-      }
-    });
+    if (this.book) { // Vérification que le livre existe avant de mettre à jour la note
+      this.bookService.updateBook(this.book.id, { rating: rating }).subscribe({
+        next: (updatedBook: Book) => {
+          console.log('Nouvelle note:', updatedBook);
+        },
+        error: (err: any) => {
+          console.error('Erreur lors de la mise à jour de la note:', err);
+        }
+      });
+    }
   }
 
   goBack(): void {
