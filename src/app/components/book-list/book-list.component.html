@@ -7,10 +7,10 @@
 
 <div class="books-container">
   <!-- TODO 13 : Les données sont passées à la liste mais pas affichées. Affiche les données -->
-  <div *ngIf="data && data.length > 0; else noBooks">
+  <div *ngIf="books && books.length > 0; else noBooks">
     <div class="book-card" *ngFor="let book of books">
       <div class="book-info">
-        <h2>{{ book.title }}</h2> <!-- TODO 14: Appliquer la directive highlight à ce champ -->
+        <h2 [appHighlight]="true" >{{ book?.title }}</h2> <!-- TODO 14: Appliquer la directive highlight à ce champ -->
         <p>{{ book.author }}</p>
         <p>
           <!-- TODO 15: Afficher la description du livre en utilisant un pour limiter à 20 caractères et ajouter des points de suspension si la description est plus longue.
@@ -21,7 +21,7 @@
         <p>Note: {{ book.rating }}</p>
         <p>Favori: {{ book.isFavorite ? 'Oui' : 'Non' }}</p>
       </div>
-      
+
       <div class="book-actions">
         <button routerLink="/books/{{book.id}}">Détails</button>
         <button (click)="toggleFavorite(book)">{{ book.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris' }}</button>

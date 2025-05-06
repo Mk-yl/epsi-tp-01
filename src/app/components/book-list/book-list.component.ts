@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book.model';
 import { Router } from '@angular/router';
+import {HighlightDirective} from '../../directives/highlight.directive';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, HighlightDirective],
   templateUrl: './book-list.component.html',
 })
 export class BookListComponent implements OnInit {
@@ -21,11 +22,11 @@ export class BookListComponent implements OnInit {
     private bookService: BookService,
     private router: Router
   ) {}
-  
+
   ngOnInit(): void {
     this.loadBooks();
   }
-  
+
   loadBooks(): void {
     this.bookService.getBooks().subscribe({
       next: (books: Book[]) => {
@@ -36,7 +37,7 @@ export class BookListComponent implements OnInit {
       }
     });
   }
-  
+
   toggleFavorite(book: Book): void {
     this.bookService.toggleFavorite(book.id).subscribe({
       next: (updatedBook: Book) => {
@@ -48,7 +49,7 @@ export class BookListComponent implements OnInit {
       }
     });
   }
-  
+
   deleteBook(id: string): void {
     this.bookService.deleteBook(id).subscribe({
       next: () => {
@@ -60,7 +61,7 @@ export class BookListComponent implements OnInit {
         console.error('Erreur lors de la suppression du livre:', err);
       }
     });
-  } 
+  }
 
   goToBookDetails(id: string): void {
     this.router.navigate(['/books', id]);
